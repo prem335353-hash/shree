@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shree Siddhivinayak Enterprises</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary-900: #0c1e3a;
+      --primary-800: #112d5e;
+      --primary-700: #1a3f7a;
+      --primary-600: #245a9e;
+      --primary-500: #2e6fc0;
+      --primary-400: #5a94db;
+      --primary-300: #8bb5e8;
+      --primary-200: #bdd6f0;
+      --primary-100: #e6f0fa;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --white: #ffffff;
+      --accent-500: #d4a017;
+      --accent-400: #e6b82e;
+      --accent-300: #f0cc5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, sans-serif;
+      color: var(--slate-800);
+      line-height: 1.6;
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(12, 30, 58, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .header.scrolled {
+      background: rgba(12, 30, 58, 0.98);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 72px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-500), var(--accent-300));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; color: var(--primary-900); flex-shrink: 0;
+    }
+    .logo-text { font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.2; }
+    .logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--slate-400); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 1px; }
+    .nav { display: flex; align-items: center; gap: 8px; }
+    .nav a { color: var(--slate-300); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav a:hover { color: var(--white); background: rgba(255, 255, 255, 0.08); }
+    .nav-cta { background: var(--accent-500) !important; color: var(--primary-900) !important; font-weight: 600 !important; margin-left: 8px; }
+    .nav-cta:hover { background: var(--accent-400) !important; }
+    .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; border-radius: 2px; }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(160deg, var(--primary-900) 0%, var(--primary-800) 40%, var(--slate-900) 100%);
+      overflow: hidden;
+    }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(46,111,192,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 64px 64px; pointer-events: none; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px; position: relative; z-index: 1; width: 100%; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.25); color: var(--accent-300); font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 0.04em; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent-400); border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
+    .hero h1 { font-size: clamp(36px, 5.5vw, 64px); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; max-width: 700px; }
+    .hero h1 .highlight { background: linear-gradient(135deg, var(--accent-400), var(--accent-300)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 18px; color: var(--slate-400); max-width: 540px; line-height: 1.7; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 12px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-500), var(--accent-400)); color: var(--primary-900); box-shadow: 0 4px 16px rgba(212,160,23,0.3); }
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(212,160,23,0.4); transform: translateY(-1px); }
+    .btn-secondary { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: var(--white); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .hero-stat { text-align: left; }
+    .hero-stat-value { font-size: 32px; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+    .hero-stat-label { font-size: 13px; color: var(--slate-500); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* SERVICES */
+    .services { padding: 100px 24px; background: var(--white); }
+    .services-inner { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label { display: inline-block; font-size: 13px; font-weight: 600; color: var(--primary-600); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 800; color: var(--slate-900); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px; }
+    .section-desc { font-size: 17px; color: var(--slate-500); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card { background: var(--white); border: 1px solid var(--slate-200); border-radius: 16px; padding: 36px 28px; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary-600), var(--accent-400)); opacity: 0; transition: opacity 0.3s ease; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(12,30,58,0.08); border-color: var(--primary-200); }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon { width: 52px; height: 52px; background: var(--primary-100); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: background 0.3s ease; }
+    .service-card:hover .service-icon { background: var(--primary-600); }
+    .service-card:hover .service-icon svg { stroke: var(--white); }
+    .service-icon svg { width: 26px; height: 26px; stroke: var(--primary-600); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s ease; }
+    .service-card h3 { font-size: 18px; font-weight: 700; color: var(--slate-900); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .service-card p { font-size: 14px; color: var(--slate-500); line-height: 1.7; }
+
+    /* ABOUT */
+    .about { padding: 100px 24px; background: var(--slate-100); }
+    .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .about-content .section-label { text-align: left; }
+    .about-content .section-title { text-align: left; }
+    .about-text { font-size: 16px; color: var(--slate-600); line-height: 1.8; margin-bottom: 24px; }
+    .about-features { display: flex; flex-direction: column; gap: 16px; }
+    .about-feature { display: flex; align-items: flex-start; gap: 12px; }
+    .about-feature-icon { width: 24px; height: 24px; background: var(--primary-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .about-feature-icon svg { width: 14px; height: 14px; stroke: var(--white); stroke-width: 2.5; fill: none; }
+    .about-feature span { font-size: 15px; color: var(--slate-700); font-weight: 500; }
+    .about-card { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+    .about-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .about-metric { text-align: center; padding: 24px 16px; background: var(--slate-100); border-radius: 12px; }
+    .about-metric-value { font-size: 28px; font-weight: 800; color: var(--primary-700); letter-spacing: -0.02em; }
+    .about-metric-label { font-size: 12px; color: var(--slate-500); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* CTA */
+    .cta { padding: 100px 24px; background: linear-gradient(160deg, var(--primary-900), var(--primary-800)); position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,160,23,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+    .cta-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .cta h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; color: var(--white); letter-spacing: -0.03em; margin-bottom: 16px; }
+    .cta p { font-size: 17px; color: var(--slate-400); margin-bottom: 36px; line-height: 1.7; }
+    .cta .btn-primary { padding: 16px 40px; font-size: 16px; }
+
+    /* FOOTER */
+    .footer { background: var(--slate-900); padding: 64px 24px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .footer-brand .logo-text { margin-bottom: 12px; }
+    .footer-brand p { font-size: 14px; color: var(--slate-500); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; color: var(--slate-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 14px; color: var(--slate-500); text-decoration: none; padding: 4px 0; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; font-size: 13px; color: var(--slate-600); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav { display: none; position: absolute; top: 72px; left: 0; right: 0; background: var(--primary-900); flex-direction: column; padding: 16px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .nav.open { display: flex; }
+      .nav a { padding: 12px 16px; width: 100%; }
+      .mobile-toggle { display: block; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">Shree Siddhivinayak<span>Enterprises</span></div>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="nav-cta">Get a Quote</a>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">Trusted Business Partner</div>
+      <h1>Building <span class="highlight">Excellence</span> in Every Endeavor</h1>
+      <p>Shree Siddhivinayak Enterprises delivers comprehensive business solutions with integrity, innovation, and a commitment to your success.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Contact Us
+        </a>
+        <a href="#services" class="btn btn-secondary">
+          Our Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">15+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">500+</div>
+          <div class="hero-stat-label">Clients Served</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">98%</div>
+          <div class="hero-stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-inner">
+      <div class="section-header fade-up">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Comprehensive Business Solutions</h2>
+        <p class="section-desc">From consulting to execution, we provide end-to-end services tailored to your unique business needs.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h3>Business Consulting</h3>
+          <p>Strategic guidance to optimize operations, improve efficiency, and drive sustainable growth for your organization.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>IT Solutions</h3>
+          <p>Technology-driven solutions including software development, system integration, and digital transformation services.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Global Sourcing</h3>
+          <p>Reliable procurement and supply chain management with a network of trusted partners across the globe.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Project Management</h3>
+          <p>End-to-end project oversight ensuring timely delivery, budget adherence, and quality outcomes every time.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <h3>Financial Advisory</h3>
+          <p>Expert financial planning, risk assessment, and investment strategies to secure your business future.</p>
+        </div>
+        <div class="service-card fade-up">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <h3>Compliance & Legal</h3>
+          <p>Navigate regulatory landscapes with confidence through our comprehensive compliance and legal support services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-content fade-up">
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Driven by Values,<br>Defined by Results</h2>
+        <p class="about-text">Shree Siddhivinayak Enterprises has been a cornerstone of business excellence for over 15 years. We combine deep industry expertise with a client-first approach to deliver measurable outcomes.</p>
+        <p class="about-text">Our team of seasoned professionals brings diverse experience across sectors, ensuring that every solution is both innovative and practical.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="about-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Client-centric approach with personalized solutions</span>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Proven track record across multiple industries</span>
+          </div>
+          <div class="about-feature">
+            <div class="about-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Transparent processes and ethical business practices</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual fade-up">
+        <div class="about-card">
+          <div class="about-card-grid">
+            <div class="about-metric"><div class="about-metric-value">15+</div><div class="about-metric-label">Years</div></div>
+            <div class="about-metric"><div class="about-metric-value">500+</div><div class="about-metric-label">Clients</div></div>
+            <div class="about-metric"><div class="about-metric-value">50+</div><div class="about-metric-label">Team Members</div></div>
+            <div class="about-metric"><div class="about-metric-value">10+</div><div class="about-metric-label">Industries</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="cta" id="contact">
+    <div class="cta-inner fade-up">
+      <h2>Ready to Grow Your Business?</h2>
+      <p>Get in touch with our team today. We'll help you find the right solution for your unique challenges and goals.</p>
+      <a href="mailto:info@shreesiddhivinayak.com" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Contact Us Now
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon">S</div>
+            <div class="logo-text">Shree Siddhivinayak<span>Enterprises</span></div>
+          </a>
+          <p>Delivering excellence through innovation, integrity, and unwavering commitment to our clients' success.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#about">About Us</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Consulting</a>
+          <a href="#services">IT Solutions</a>
+          <a href="#services">Sourcing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:info@shreesiddhivinayak.com">info@shreesiddhivinayak.com</a>
+          <a href="tel:+911234567890">+91 123 456 7890</a>
+          <a href="#">Mumbai, India</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Shree Siddhivinayak Enterprises. All rights reserved.</span>
+        <span>Designed with excellence</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    const mobileToggle = document.getElementById('mobileToggle');
+    const nav = document.getElementById('nav');
+    mobileToggle.addEventListener('click', () => nav.classList.toggle('open'));
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('open'));
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
